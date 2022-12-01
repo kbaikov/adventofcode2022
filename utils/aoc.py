@@ -5,14 +5,12 @@ with some pathlib.Path used instead of os.path
 """
 
 import argparse
-import os.path
 import re
 import sys
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
-import os
 
 HERE = Path(__file__).parent
 
@@ -28,9 +26,14 @@ def get_input(year: int, day: int) -> str:
 
 
 def get_year_day() -> tuple[int, int]:
-    cwd = os.getcwd()
-    day_s = os.path.basename(cwd)
-    year_s = os.path.basename(os.path.dirname(cwd))
+    """Get (year, day) based on the current working dir
+
+    Substituted os.path with pathlib.Path according to this table:
+    https://docs.python.org/3/library/pathlib.html#correspondence-to-tools-in-the-os-module
+    """
+    cwd = Path.cwd()
+    day_s = Path(cwd).name
+    year_s = Path(Path(cwd).parent).name
 
     if not day_s.startswith("day") or not year_s.startswith("adventofcode"):
         raise AssertionError(f"unexpected working dir: {cwd}")

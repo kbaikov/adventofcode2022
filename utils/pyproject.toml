@@ -15,4 +15,4 @@ py-modules = ["aoc"]
 
 [project.scripts]
 download = "aoc:download_input"
-submit = "aoc:submit_solition"
+submit = "aoc:submit_solution"

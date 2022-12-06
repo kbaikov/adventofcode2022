@@ -66,7 +66,7 @@ RIGHT = "That's the right answer!"
 ALREADY_DONE = re.compile(r"You don't seem to be solving.*\?")
 
 
-def _post_answer(year: int, day: int, part: int, answer: int) -> str:
+def _post_answer(year: int, day: int, part: int, answer: str) -> str:
     params = urllib.parse.urlencode({"level": part, "answer": answer})
     req = urllib.request.Request(
         f"https://adventofcode.com/{year}/day/{day}/answer",
@@ -85,7 +85,7 @@ def submit_solution() -> int:
     args = parser.parse_args()
 
     year, day = get_year_day()
-    answer = int(sys.stdin.read())
+    answer = sys.stdin.read()
 
     print(f"answer: {answer}")
 
